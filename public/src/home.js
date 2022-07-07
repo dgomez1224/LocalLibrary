@@ -34,10 +34,8 @@ function getMostPopularBooks(books) {
     acc.push({name: book.title, count: book.borrows.length})
     return acc;
   }, []);
-
   
   return sortAndSlice(popular);
-
 
 }
 
