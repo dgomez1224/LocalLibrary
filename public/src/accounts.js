@@ -20,9 +20,10 @@ function getTotalNumberOfBorrows(account, books) {
   return result;
 }
 
+//Changed function to include .map
+
 function getBooksPossessedByAccount(account, books, authors) {
   // book.borrows.some(borrow => !borrow.returned && borrow.id === account.id) looks thru borrows and if returned is false and the id's match for any book it returns true
-  //
   return books
     .filter(
       (book) => (book.borrows[0].id === account.id) & !book.borrows[0].returned
