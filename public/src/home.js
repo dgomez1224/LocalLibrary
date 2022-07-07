@@ -11,6 +11,8 @@ function getBooksBorrowedCount(books) {
   return borrowed.length;
 }
 
+// Created sortAndSlice as a helper function to sort lists and then limit to 5 results.
+
 function sortAndSlice(list) {
   list.sort((nameA,nameB)=> nameB.count - nameA.count);
   return list.slice(0,5);
