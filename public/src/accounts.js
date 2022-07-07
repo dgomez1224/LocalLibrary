@@ -4,8 +4,8 @@ function findAccountById(accounts, id) {
 }
 
 function sortAccountsByLastName(accounts) {
-   const result = accounts.sort((nameA, nameB) => nameA.name.last.toLowerCase() > nameB.name.last.toLowerCase() ? 1 : -1 );
-   return result;
+  const result = accounts.sort((nameA, nameB) => nameA.name.last.toLowerCase() > nameB.name.last.toLowerCase() ? 1 : -1);
+  return result;
 }
 
 function getTotalNumberOfBorrows(account, books) {
@@ -15,14 +15,17 @@ function getTotalNumberOfBorrows(account, books) {
 }
 
 function getBooksPossessedByAccount(account, books, authors) {
-  //books.borrows.id === false
-  //books.map(books possessed)
-  //It returns an array of book objects, including author information, that represents all books _currently checked out_ by the given account. 
-  //_Look carefully at the object below,_ as it's not just the book object; the author object is nested inside of it.
-  const acc = account.id;
-  const borrowed = books.filter(book => book.borrows.some(borrow => !borrow.returned && borrow.id === acc));
-  borrowed.forEach(book => book.author = authors.find(author => book.authorId == author.id));
-  return borrowed;
+  // book.borrows.some(borrow => !borrow.returned && borrow.id === account.id) looks thru borrows and if returned is false and the id's match for any book it returns true
+  // 
+  return (books
+    .filter(book => book.borrows[0].id === account.id & !book.borrows[0].returned)
+    .map(book => {
+      book['author'] = authors.find(author => author.id === book.authorId)
+      return book;
+    }
+
+    )
+  )
 }
 
 module.exports = {
